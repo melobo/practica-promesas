@@ -53,23 +53,39 @@ function paintPromise(wall) {
     })
 }
 
-buildPromise(wallToBuild)
-    .then(wallBuilt => {
-        planishPromise(wallBuilt)
-            .then(wallPlanished => {
-                paintPromise(wallPlanished)
-                    .then(wallPainted => {
-                        console.log('DONE')
-                        console.log('wallPainted: ', wallPainted)
-                    })
-                    .catch(error => {
-                        console.error('ERROR at paint promise')
-                    })
-            })
-            .catch(error => {
-                console.error('ERROR at planish promise')
-            })
+// buildPromise(wallToBuild)
+//     .then(wallBuilt => {
+//         planishPromise(wallBuilt)
+//             .then(wallPlanished => {
+//                 paintPromise(wallPlanished)
+//                     .then(wallPainted => {
+//                         console.log('DONE')
+//                         console.log('wallPainted: ', wallPainted)
+//                     })
+//                     .catch(error => {
+//                         console.error('ERROR at paint promise')
+//                     })
+//             })
+//             .catch(error => {
+//                 console.error('ERROR at planish promise')
+//             })
+//     })
+//     .catch(error => {
+//         console.error('ERROR at built promise')
+//     })
+
+async function main() {
+    const wallBuilt = await buildPromise(wallToBuild)
+    const wallPlanished = await planishPromise(wallBuilt)
+    const wallPainted = await paintPromise(wallPlanished)
+
+    console.log('DONE: ', wallPainted)
+}
+
+main()
+    .then(() => {
+        console.log('Todo cool')
     })
     .catch(error => {
-        console.error('ERROR at built promise')
+        console.log('Algo fallo')
     })
